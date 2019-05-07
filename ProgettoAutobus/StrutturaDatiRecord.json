@@ -1,0 +1,22 @@
+{ "VettoreDati":[
+    {
+        "IdVeiclolo": 1,
+        "StringaVeicolo": "Pordenone-Talponedo",
+        "TimeStamp": "2019-05-03 22:33:00",
+        "Latitudine": 45.95,
+        "Longitudine": 12.65,
+        "Altitudine": 30.0,
+        "Passeggeri": 0,
+        "PorteAperte": false
+    },
+    {
+        "IdVeiclolo": 2,
+        "StringaVeicolo": "Pordenone-Talmassons",
+        "TimeStamp": "2019-05-03 22:33:00",
+        "Latitudine": 45.95,
+        "Longitudine": 12.65,
+        "Altitudine": 30.0,
+        "Passeggeri": 0,
+        "PorteAperte": false
+    }
+]}

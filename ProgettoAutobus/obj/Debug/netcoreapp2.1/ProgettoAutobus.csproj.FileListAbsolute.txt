@@ -1,0 +1,11 @@
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\bin\Debug\netcoreapp2.1\ProgettoAutobus.deps.json
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\bin\Debug\netcoreapp2.1\ProgettoAutobus.runtimeconfig.json
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\bin\Debug\netcoreapp2.1\ProgettoAutobus.runtimeconfig.dev.json
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\bin\Debug\netcoreapp2.1\ProgettoAutobus.dll
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\bin\Debug\netcoreapp2.1\ProgettoAutobus.pdb
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\obj\Debug\netcoreapp2.1\ProgettoAutobus.csprojAssemblyReference.cache
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\obj\Debug\netcoreapp2.1\ProgettoAutobus.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\obj\Debug\netcoreapp2.1\ProgettoAutobus.AssemblyInfoInputs.cache
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\obj\Debug\netcoreapp2.1\ProgettoAutobus.AssemblyInfo.cs
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\obj\Debug\netcoreapp2.1\ProgettoAutobus.dll
+C:\Users\admin\Documents\Codice\Csharp\ProgettoAutobus\obj\Debug\netcoreapp2.1\ProgettoAutobus.pdb
