@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\admin\\Documents\\Codice\\Csharp\\ProgettoAutobus\\ProgettoAutobus.csproj",
+      "projectUniqueName": "c:\\Users\\admin\\Documents\\Codice\\ProjectWork-GreenLine\\ProgettoAutobus\\ProgettoAutobus.csproj",
       "projectName": "ProgettoAutobus",
-      "projectPath": "c:\\Users\\admin\\Documents\\Codice\\Csharp\\ProgettoAutobus\\ProgettoAutobus.csproj",
+      "projectPath": "c:\\Users\\admin\\Documents\\Codice\\ProjectWork-GreenLine\\ProgettoAutobus\\ProgettoAutobus.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\admin\\Documents\\Codice\\Csharp\\ProgettoAutobus\\obj\\",
+      "outputPath": "c:\\Users\\admin\\Documents\\Codice\\ProjectWork-GreenLine\\ProgettoAutobus\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

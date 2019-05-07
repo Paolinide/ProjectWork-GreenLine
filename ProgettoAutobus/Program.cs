@@ -10,12 +10,14 @@ namespace ProgettoAutobus
         {
             Console.Clear();
             var v1 = new Veicolo();
-            for (int i = 0; i < 50; i++)
+            Trasmettitore.connessione = true;
+            for (int i = 0; i < 20; i++)
             {
                 //if (i > 25) Trasmettitore.connessione = true;
+                System.Threading.Thread.Sleep(500);
                 v1.Aggiorna();
             }
-            //Archiviatore.ThrowAll();
+            Archiviatore.ThrowAll();
             Console.WriteLine("Connessione " + (Trasmettitore.VerificaConnessione() ? "attiva" : "non attiva"));
 
             // var v2 = new Veicolo();

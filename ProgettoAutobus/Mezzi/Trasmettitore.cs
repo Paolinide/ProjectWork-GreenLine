@@ -12,16 +12,16 @@ namespace ProgettoAutobus
     static class Trasmettitore // l'elemento che trasmette i dati al server
     {
         static public bool connessione = false; /////////////////// QUESTA SERVE SOLO PER IL DEBUG, POI VA ELIMINATA
-        static private int limiteRecord = 5; // indica quanti record vengono messi nella pila prima di creare un file nuovo con essa
+        static private int limiteRecord = 100; // indica quanti record vengono messi nella pila prima di creare un file nuovo con essa
         private static readonly HttpClient client = new HttpClient();
-        static string indirizzoServer = "127.0.0.1";
+        static string indirizzoServer = "127.0.0.1:8086";
         static bool connessioneAttiva => VerificaConnessione();
         static Stack pila = new Stack(); // il contenitore dei record
         //Archiviatore a; // il sistema di archiviazione che però non ha senso sia un'istanza
         static public bool VerificaConnessione()
         {
             // verifichiamo lo stato della connessione
-            return connessione;
+            //return connessione;
             try
             {
                 Ping ping = new Ping();
@@ -30,6 +30,7 @@ namespace ProgettoAutobus
             }
             catch (System.Exception)
             {
+                Console.WriteLine("*** Invio fallito!");
                 return false;
                 throw;
             }
@@ -79,26 +80,49 @@ namespace ProgettoAutobus
                 Console.WriteLine("Inoltro:");
                 Console.WriteLine(stringaPila);
 
-                var request = (HttpWebRequest)WebRequest.Create(indirizzoServer);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(indirizzoServer);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
 
-                var data = Encoding.ASCII.GetBytes(stringaPila);
-
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = data.Length;
-
-                using (var stream = request.GetRequestStream())
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    stream.Write(data, 0, data.Length);
+                    string json = stringaPila;
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
                 }
 
-                var response = (HttpWebResponse)request.GetResponse();
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                }
 
-                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                // MMERDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // var request = (HttpWebRequest)WebRequest.Create(indirizzoServer);
+
+                // var data = Encoding.ASCII.GetBytes(stringaPila);
+
+                // request.Method = "POST";
+                // request.ContentType = "application/x-www-form-urlencoded";
+                // request.ContentLength = data.Length;
+
+                // using (var stream = request.GetRequestStream())
+                // {
+                //     stream.Write(data, 0, data.Length);
+                // }
+
+                // var response = (HttpWebResponse)request.GetResponse();
+
+                // var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Console.WriteLine("*** Invio riuscito!");
                 return true;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
+                Console.WriteLine("*** Invio Fallito: " + e);
                 return false;
                 throw;
             }
