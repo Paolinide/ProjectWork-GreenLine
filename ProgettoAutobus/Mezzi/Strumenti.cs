@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using static ProgettoAutobus.Trasmettitore;
 
 namespace ProgettoAutobus
 {
@@ -15,7 +16,12 @@ namespace ProgettoAutobus
         private int passi = 10; // passi al termine della direzione attuale
         public Veicolo()
         {
-            SetCittà(numeroDiMezzi, ref _jsonData);
+            if (numeroDiMezzi < 5) ScegliCittà(numeroDiMezzi, ref _jsonData);
+            else
+            {
+                ScegliCittà(0, ref _jsonData);
+                _jsonData.SetDescrizione(_jsonData.descrizione + (numeroDiMezzi - 3));
+            }
             _jsonData.SetId(seriale);
             Console.WriteLine(_jsonData);
         }
@@ -28,13 +34,13 @@ namespace ProgettoAutobus
                 {
                     // si aprono le porte
                     _jsonData.SetPorte(true);
-                    // qualcuno potrebbe essere sceso
-                    _jsonData.AddPasseggeri(-(new Random()).Next(5));
                 }
-                else if (passi == 0) // stiamo per ripartire
+                else if (passi == 1) // stiamo per ripartire
                 {
-                    // qualcuno potrebbe essere salito
-                    _jsonData.AddPasseggeri((new Random()).Next(5));
+                    // qualcuno potrebbe essere salito o sceso
+                    _jsonData.AddPasseggeri((new Random()).Next(5)-2);
+                }else if (passi == 0) // stiamo per ripartire
+                {
                     // si chiudono le porte
                     _jsonData.SetPorte(false);
                 }
@@ -49,8 +55,8 @@ namespace ProgettoAutobus
                 _jsonData.AddLatitudine(velocità * Math.Sin(angolo));
                 _jsonData.AddLongitudine(velocità * Math.Cos(angolo));
             }
-            //Console.WriteLine($"Attuale direzione: {direzione} angolo: {angolo} velocità: {velocità} passi: {passi}");
-            Trasmettitore.InoltraRecord(_jsonData);
+            Console.WriteLine($"Attuale direzione: {direzione} angolo: {angolo} velocità: {velocità} passi: {passi}");
+            InoltraRecord(_jsonData);
         }
         private void CambiaDirezione()
         {
@@ -61,7 +67,7 @@ namespace ProgettoAutobus
             passi = (nuovaDirezione == 0 ? 3 : (nuovaDirezione == 1 ? 10 : 5)); // passi = 0:3 1:10 else:5
             Console.WriteLine($"Nuova direzione: {direzione} angolo: {angolo} velocità: {velocità} passi: {passi}");
         }
-        private void SetCittà(int indice, ref JsonDataRecord jsonData)
+        private void ScegliCittà(int indice, ref JsonDataRecord jsonData)
         {
             indice = Math.Max(0, Math.Min(4, indice)); // riportiamo l'indice entro i ranghi per sicurezza
             string[] des = { "Pordenone", "Udine", "Trieste", "Portogruaro", "Padova" };
@@ -114,6 +120,7 @@ namespace ProgettoAutobus
         }
         // MODIFICATORI (così si possono concatenare come cazzo vogliamo)
         public JsonDataRecord SetId(int id) { _idVeicolo = id; return this; }
+        public string descrizione => _descrizione;
         public JsonDataRecord SetDescrizione(string descrizione) { _descrizione = descrizione; return this; }
         public JsonDataRecord SetIstante(string istante) { _timeStamp = istante; return this; }
         public JsonDataRecord AggiornaIstante() { _timeStamp = DateTime.Now.ToString(); return this; }
@@ -136,9 +143,9 @@ namespace ProgettoAutobus
                   "\", \"timeStamp\": \"" + _timeStamp +
                   "\", \"latitudine\": " + _latitudine.ToString().Replace(',', '.') +
                   ", \"longitudine\": " + _longitudine.ToString().Replace(',', '.') +
-                  ", \"altitudine\": " + _altitudine.ToString().Replace(',', '.') +
+                  ", \"altitudine\": " + _altitudine.ToString("N2").Replace(',', '.') +
                   ", \"passeggeri\": " + _passeggeri +
-                  ", \"porteAperte\": " + _porteAperte +
+                  ", \"porteAperte\": " + (_porteAperte ? "true" : "false") +
                   " }";
         }
         public static string StackToString(Stack pila)

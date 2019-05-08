@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using static ProgettoAutobus.Trasmettitore;
 
 namespace ProgettoAutobus
 {
@@ -10,15 +11,16 @@ namespace ProgettoAutobus
         {
             Console.Clear();
             var v1 = new Veicolo();
-            Trasmettitore.connessione = true;
+            //ConnessioneAutomatica();
+            //DisattivaConnessione();
             for (int i = 0; i < 20; i++)
             {
-                //if (i > 25) Trasmettitore.connessione = true;
-                System.Threading.Thread.Sleep(500);
+                //if (i > 6) AttivaConnessione();
+                System.Threading.Thread.Sleep(100);
                 v1.Aggiorna();
             }
             Archiviatore.ThrowAll();
-            Console.WriteLine("Connessione " + (Trasmettitore.VerificaConnessione() ? "attiva" : "non attiva"));
+            Console.WriteLine($"Connessione {(Trasmettitore.connessioneAttiva ? "" : "non ")}attiva");
 
             // var v2 = new Veicolo();
             // var v3 = new Veicolo();

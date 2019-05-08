@@ -6,33 +6,40 @@ using System.Net.NetworkInformation;
 using System.Net.Http;
 using System.Text;
 using System.IO;
+using static ProgettoAutobus.Archiviatore;
 
 namespace ProgettoAutobus
 {
     static class Trasmettitore // l'elemento che trasmette i dati al server
     {
-        static public bool connessione = false; /////////////////// QUESTA SERVE SOLO PER IL DEBUG, POI VA ELIMINATA
-        static private int limiteRecord = 100; // indica quanti record vengono messi nella pila prima di creare un file nuovo con essa
+        static private bool? _connessione = null; /////////////////// QUESTA SERVE SOLO PER IL DEBUG, POI VA ELIMINATA
+        static private int limiteRecord = 5; // indica quanti record vengono messi nella pila prima di creare un file nuovo con essa
         private static readonly HttpClient client = new HttpClient();
-        static string indirizzoServer = "127.0.0.1:8086";
-        static bool connessioneAttiva => VerificaConnessione();
+        static string indirizzoServer = "http://127.0.0.1:3000/";
         static Stack pila = new Stack(); // il contenitore dei record
         //Archiviatore a; // il sistema di archiviazione che però non ha senso sia un'istanza
-        static public bool VerificaConnessione()
+        static public void AttivaConnessione() => _connessione = true;
+        static public void DisattivaConnessione() => _connessione = false;
+        static public void ConnessioneAutomatica() => _connessione = null;
+        static public bool connessioneAttiva
         {
-            // verifichiamo lo stato della connessione
-            //return connessione;
-            try
+            get
             {
-                Ping ping = new Ping();
-                PingReply pingresult = ping.Send(indirizzoServer);
-                return (pingresult.Status.ToString() == "Success");
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("*** Invio fallito!");
-                return false;
-                throw;
+                // verifichiamo lo stato della connessione
+                if (_connessione != null) return (bool)_connessione;
+                try
+                {
+                    Ping ping = new Ping();
+                    PingReply pingresult = ping.Send("8.8.8.8");//indirizzoServer);
+                    Console.WriteLine("*** connessione attiva!");
+                    return (pingresult.Status.ToString() == "Success");
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("*** connessione non attiva!");
+                    return false;
+                    throw;
+                }
             }
         }
         static public bool InoltraRecord(JsonDataRecord jsonData)
@@ -60,10 +67,10 @@ namespace ProgettoAutobus
                 else return; // se ci sono problemi non se ne fa niente
             }
             // verifichiamo se ci sono file salvati da inviare
-            while (Archiviatore.fileInArchivio)
+            while (fileInArchivio)
             {
                 // cerchiamo di spedire l'ultimo file recuperato
-                if (Spedisci(Archiviatore.Pull())) Archiviatore.ThrowLast();
+                if (Spedisci(Pull())) ThrowLast();
                 else return; // se ci sono problemi non se ne fa niente
                 // // recuperiamo i dati archiviati
                 // string stringaPila = Archiviatore.Pop();
@@ -74,7 +81,7 @@ namespace ProgettoAutobus
 
         static bool Spedisci(string stringaPila)
         { // trasmissione di pile di record
-            // l'oggetto jsonData è stato previsto anche come array di record, pertanto può essere inviata l'intera pila senza dover ciclare i suoi elementi
+            // l'oggetto jsonData è stato pensato come array di record, pertanto può essere inviata l'intera pila senza dover ciclare i suoi elementi
             try
             {
                 Console.WriteLine("Inoltro:");
@@ -99,30 +106,12 @@ namespace ProgettoAutobus
                     var result = streamReader.ReadToEnd();
                 }
 
-                // MMERDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // var request = (HttpWebRequest)WebRequest.Create(indirizzoServer);
-
-                // var data = Encoding.ASCII.GetBytes(stringaPila);
-
-                // request.Method = "POST";
-                // request.ContentType = "application/x-www-form-urlencoded";
-                // request.ContentLength = data.Length;
-
-                // using (var stream = request.GetRequestStream())
-                // {
-                //     stream.Write(data, 0, data.Length);
-                // }
-
-                // var response = (HttpWebResponse)request.GetResponse();
-
-                // var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Console.WriteLine("*** Invio riuscito!");
+                Console.WriteLine("*** Invio Riuscito!");
                 return true;
             }
             catch (System.Exception e)
             {
-                Console.WriteLine("*** Invio Fallito: " + e);
+                Console.WriteLine("*** Invio Fallito:\n" + e);
                 return false;
                 throw;
             }
@@ -132,7 +121,7 @@ namespace ProgettoAutobus
             // infila il dato in una pila
             pila.Push(jsonData);
             // se la pila raggiunge una certa dimensione crea un file coi dati e svuota la pila
-            if (pila.Count >= limiteRecord) Archiviatore.Push(ref pila); // la pila viene passata per iferimento per poter essere manipolata
+            if (pila.Count >= limiteRecord) Push(ref pila); // la pila viene passata per iferimento per poter essere manipolata
         }
     }
 }
