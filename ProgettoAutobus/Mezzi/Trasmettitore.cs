@@ -12,12 +12,11 @@ namespace ProgettoAutobus
 {
     static class Trasmettitore // l'elemento che trasmette i dati al server
     {
-        static private bool? _connessione = null; /////////////////// QUESTA SERVE SOLO PER IL DEBUG, POI VA ELIMINATA
         static private int limiteRecord = 5; // indica quanti record vengono messi nella pila prima di creare un file nuovo con essa
         private static readonly HttpClient client = new HttpClient();
         static string indirizzoServer = "http://127.0.0.1:3000/";
         static Stack pila = new Stack(); // il contenitore dei record
-        //Archiviatore a; // il sistema di archiviazione che però non ha senso sia un'istanza
+        static private bool? _connessione = null; // per forzare a credere la connessione aperta o chiusa
         static public void AttivaConnessione() => _connessione = true;
         static public void DisattivaConnessione() => _connessione = false;
         static public void ConnessioneAutomatica() => _connessione = null;
