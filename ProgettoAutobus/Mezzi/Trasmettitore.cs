@@ -16,7 +16,7 @@ namespace ProgettoAutobus
         private static readonly HttpClient client = new HttpClient();
         static string indirizzoServer = "http://127.0.0.1:3000/";
         static Stack pila = new Stack(); // il contenitore dei record
-        static private bool? _connessione = null; // per forzare a credere la connessione aperta o chiusa
+        static private bool? _connessione = null; // per forzare a credere la connessione aperta o chiusa, automatica di default
         static public void AttivaConnessione() => _connessione = true;
         static public void DisattivaConnessione() => _connessione = false;
         static public void ConnessioneAutomatica() => _connessione = null;
@@ -50,9 +50,12 @@ namespace ProgettoAutobus
                 InoltraAlServer(jsonData);
                 return true;
             }
-            // altrimenti la rete non è raggiungibile e memoriziamo i dati in locale
-            Trattieni(jsonData);
-            return false;
+            else
+            {
+                // altrimenti la rete non è raggiungibile e memoriziamo i dati in locale
+                Trattieni(jsonData);
+                return false;
+            }
         }
         static void InoltraAlServer(JsonDataRecord jsonData)
         {
@@ -77,7 +80,6 @@ namespace ProgettoAutobus
                 // Spedisci(stringaPila);
             };
         }
-
         static bool Spedisci(string stringaPila)
         { // trasmissione di pile di record
             // l'oggetto jsonData è stato pensato come array di record, pertanto può essere inviata l'intera pila senza dover ciclare i suoi elementi
@@ -92,9 +94,8 @@ namespace ProgettoAutobus
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    string json = stringaPila;
-
-                    streamWriter.Write(json);
+                    //streamWriter.Write("{\"uno\": \"uno\"}");
+                    streamWriter.Write(stringaPila);
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
@@ -113,6 +114,26 @@ namespace ProgettoAutobus
                 Console.WriteLine("*** Invio Fallito:\n" + e);
                 return false;
                 throw;
+            }
+        }
+        static public void InviaMessaggio(string messaggio)
+        { // trasmissione di pile di record
+          // l'oggetto jsonData è stato pensato come array di record, pertanto può essere inviata l'intera pila senza dover ciclare i suoi elementi
+            Console.WriteLine("Inoltro:");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(indirizzoServer);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                streamWriter.Write("{ \"messaggio\": " + "\"" + messaggio + "\" }");
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
             }
         }
         static void Trattieni(JsonDataRecord jsonData)

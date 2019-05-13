@@ -7,12 +7,17 @@ namespace ProgettoAutobus
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             Console.Clear();
+            // Console.WriteLine("{ \"" + "titolo" + "\": " + "\"" + "messaggio" + "\" }");
+            Console.WriteLine(" ***********  INIZIO  *********** ");
+            //return;
             var v1 = new Veicolo();
             //ConnessioneAutomatica();
-            DisattivaConnessione();
+            //DisattivaConnessione();
+            InviaMessaggio("--- INIZIO ---");
             for (int i = 0; i < 20; i++)
             {
                 if (i > 6) AttivaConnessione();
@@ -21,6 +26,7 @@ namespace ProgettoAutobus
             }
             Archiviatore.ThrowAll();
             Console.WriteLine($"Connessione {(Trasmettitore.connessioneAttiva ? "" : "non ")}attiva");
+            Console.WriteLine(" ***********   FINE   *********** ");
 
             // var v2 = new Veicolo();
             // var v3 = new Veicolo();
