@@ -160,10 +160,10 @@ namespace ProgettoAutobus
         public static string StackToString(Stack pila)
         {
             // una pila intera viene convertita in stringa
-            string risultato = "{ \"VettoreDati\": [\n";
+            string risultato = "[\n";
             for (int i = 0; pila.Count > 0; i++)
                 risultato += (i > 0 ? ",\n" : "") + pila.Pop().ToString();
-            return risultato += "\n]}";
+            return risultato += "\n]";
         }
         // public Dictionary<string, string> ToDictionary()
         // {

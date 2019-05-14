@@ -11,6 +11,11 @@ namespace ProgettoAutobus
         static void Main(string[] args)
         {
             Console.Clear();
+            // Stack pila = new Stack();
+            // JsonDataRecord jsdata = new JsonDataRecord();
+            // pila.Push(jsdata);
+            // Console.WriteLine(JsonDataRecord.StackToString(pila));
+            // return;
             // Console.WriteLine("{ \"" + "titolo" + "\": " + "\"" + "messaggio" + "\" }");
             Console.WriteLine(" ***********  INIZIO  *********** ");
             //return;
