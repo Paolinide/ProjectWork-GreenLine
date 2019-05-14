@@ -14,7 +14,7 @@ namespace ProgettoAutobus
     {
         static private int limiteRecord = 5; // indica quanti record vengono messi nella pila prima di creare un file nuovo con essa
         private static readonly HttpClient client = new HttpClient();
-        static string indirizzoServer = "http://127.0.0.1:3000/";
+        static string indirizzoServer = "http://127.0.0.1:4000/";
         static Stack pila = new Stack(); // il contenitore dei record
         static private bool? _connessione = null; // per forzare a credere la connessione aperta o chiusa, automatica di default
         static public void AttivaConnessione() => _connessione = true;

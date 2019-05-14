@@ -146,8 +146,7 @@ namespace ProgettoAutobus
         public override string ToString()
         {
             // qui i dati del singolo record vengono convertiti in stringa
-            return "{ \"idRecord\": " + idRecord + ", " +
-                  "\"idVeicolo\": " + _idVeicolo +
+            return "{ \"idVeicolo\": " + _idVeicolo +
                   ", \"descrizione\": \"" + _descrizione +
                   "\", \"timeStamp\": \"" + _timeStamp +
                   "\", \"latitudine\": " + _latitudine.ToString().Replace(',', '.') +

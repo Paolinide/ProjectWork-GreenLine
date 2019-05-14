@@ -22,7 +22,7 @@ namespace ProgettoAutobus
             var v1 = new Veicolo();
             //ConnessioneAutomatica();
             //DisattivaConnessione();
-            InviaMessaggio("--- INIZIO ---");
+            // InviaMessaggio("--- INIZIO ---");
             for (int i = 0; i < 20; i++)
             {
                 if (i > 6) AttivaConnessione();
