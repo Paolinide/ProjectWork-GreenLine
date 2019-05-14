@@ -57,10 +57,10 @@ namespace ProgettoAutobus
                 return false;
             }
         }
-        static void InoltraAlServer(JsonDataRecord jsonData)
+        static void InoltraAlServer(JsonDataRecord jsonData, bool trattieni = true)
         {
             // non ci sono impedimenti e quindi spediamo il nostro dato al server
-            if (!Spedisci("{ \"VettoreDati\": [ " + jsonData.ToString() + " ]}")) Trattieni(jsonData);
+            if (!Spedisci("{ \"VettoreDati\": [ " + jsonData.ToString() + " ]}") && trattieni) Trattieni(jsonData);
             // poi verifichiamo se la pila ha altri record da inviare
             if (pila.Count > 0)
             {
