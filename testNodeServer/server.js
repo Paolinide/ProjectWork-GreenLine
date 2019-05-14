@@ -26,7 +26,7 @@ app.listen(port, (err) => {
 });
 const influx = new Influx.InfluxDB({
   host: 'localhost',
-  database: 'express_2',
+  database: 'express_3',
   schema: [
     {
       measurement: 'response_times',
@@ -48,8 +48,8 @@ const influx = new Influx.InfluxDB({
 });
 influx.getDatabaseNames()
   .then(names => {
-    if (!names.includes('express_2')) {
-      return influx.createDatabase('express_2');
+    if (!names.includes('express_3')) {
+      return influx.createDatabase('express_3');
     }
   })
   .then(() => {
@@ -81,12 +81,18 @@ influx.getDatabaseNames()
 var element;
 app.post('/', (request, response) => {
   dati = request.body[0];
-   
-  influx.writePoints([
+ influx.writePoints([
   {
     measurement: 'response_times',
     tags: { host: os.hostname() },
-    fields: {dati
+    fields: { IdVeicolo: dati.idVeicolo,
+            StringaVeicolo: dati.stringaVeicolo,
+            TimeStamp: dati.timeStamp,
+            Latitudine: dati.latitudine,
+            Longitudine: dati.longitudine,
+            Altitudine: dati.altitudine,
+            Passeggeri: dati.passeggeri,
+            PorteAperte: dati.porteAperte
     },
   }
 ]).catch(err => {
@@ -96,3 +102,16 @@ app.post('/', (request, response) => {
   console.log("// " + (++contatore));
   console.log(request.body);
 });
+
+//parte in get
+
+
+app.get('/get', function (req, res) {
+  influx.query(`
+    select * from response_times `)
+    .then(result => {
+    res.json(result)
+  }).catch(err => {
+    res.status(500).send(err.stack)
+  })
+})

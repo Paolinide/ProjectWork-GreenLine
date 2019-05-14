@@ -23,7 +23,7 @@ namespace ProgettoAutobus
             //ConnessioneAutomatica();
             //DisattivaConnessione();
             // InviaMessaggio("--- INIZIO ---");
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 30; i++)
             {
                 if (i > 6) AttivaConnessione();
                 System.Threading.Thread.Sleep(1000); // aspetta 1 secondo
