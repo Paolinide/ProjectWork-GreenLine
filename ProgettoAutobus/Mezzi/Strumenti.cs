@@ -149,8 +149,8 @@ namespace ProgettoAutobus
             return "{ \"idVeicolo\": " + _idVeicolo +
                   ", \"descrizione\": \"" + _descrizione +
                   "\", \"timeStamp\": \"" + _timeStamp +
-                  "\", \"latitudine\": " + _latitudine.ToString().Replace(',', '.') +
-                  ", \"longitudine\": " + _longitudine.ToString().Replace(',', '.') +
+                  "\", \"latitudine\": " + _latitudine.ToString("0.00").Replace(',', '.') +
+                  ", \"longitudine\": " + _longitudine.ToString("0.00").Replace(',', '.') +
                   ", \"altitudine\": " + _altitudine.ToString("N2").Replace(',', '.') +
                   ", \"passeggeri\": " + _passeggeri +
                   ", \"porteAperte\": " + (_porteAperte ? "true" : "false") +
