@@ -21,7 +21,7 @@ namespace Generatore_Autobus_beta_2
             //Console.Write($" <(cnt:{stack.Count} - max:{Preferences.maxRecordsStacked})> ");
             if (stack.Count >= Preferences.maxRecordsStacked)
             {
-                Console.Write("@");
+                //Console.Write("@");
                 string fileName = dataFileName(_filesCounter + 1);
                 string fileData = JsonDataRecord.JsonToString(JsonDataRecord.StackToStream(stack));
                 if (SaveData(fileName, fileData)) stack.Clear();
@@ -36,7 +36,7 @@ namespace Generatore_Autobus_beta_2
                 using (StreamWriter scriviFile = new StreamWriter(fileName))
                 {
                     scriviFile.WriteLine(fileData);
-                    Console.WriteLine($" ... effettuato con successo.");
+                    // Console.WriteLine($" ... effettuato con successo.");
                 }
                 _filesCounter += 1; // dopo la scrittura viene anche incrementato il contatore dei file
                 return true;

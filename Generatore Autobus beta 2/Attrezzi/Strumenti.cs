@@ -108,7 +108,7 @@ namespace Generatore_Autobus_beta_2
         private int idRecord = 0;
         public JsonDataRecord UpdateIdRecord() { idRecord = newRecord; return this; } // per modificarne il valore concatenando le funzioni
 
-        //* */[DataMember] // nel json non serve
+        [DataMember] // nel json non serve
         private string description; // descrizione, tratta o descrizione del veicolo
         public JsonDataRecord SetDescription(string descrizione) { description = descrizione; return this; }
         public string getDescription => description;

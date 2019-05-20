@@ -85,20 +85,20 @@ app.post('/', (request, response) => {
   {
     measurement: 'response_times',
     tags: { host: os.hostname() },
-    fields: { IdVeicolo: dati.idVeicolo,
-            StringaVeicolo: dati.stringaVeicolo,
-            TimeStamp: dati.timeStamp,
-            Latitudine: dati.latitudine,
-            Longitudine: dati.longitudine,
-            Altitudine: dati.altitudine,
-            Passeggeri: dati.passeggeri,
-            PorteAperte: dati.porteAperte
+    fields: { IdVeicolo: dati.idVehicle,
+            StringaVeicolo: dati.description,
+            TimeStamp: dati.timeDate,
+            Latitudine: dati.latitude,
+            Longitudine: dati.longitude,
+            Altitudine: dati.altitude,
+            Passeggeri: dati.passenger,
+            PorteAperte: dati.theDoors
     },
   }
 ]).catch(err => {
       console.error(`Error saving data to InfluxDB! ${err.stack}`)
     })
-  response.send('Arrivato tutto bene!');
+  response.send('Ok');
   console.log("// " + (++contatore));
   console.log(request.body);
 });

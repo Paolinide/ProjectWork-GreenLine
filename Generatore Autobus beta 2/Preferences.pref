@@ -1,5 +1,5 @@
 Destinatario del Ping: 8.8.8.8
-Indirizzo del Server di archiviazione dati: http://127.0.0.1:3000/
+Indirizzo del Server di archiviazione dati: http://127.0.0.1:4000/
 Nome di questo file: Preferences.pref
 Nome del file di salvataggio dei record non iviati: RecordsSaved_{0}.save
 Numero di record accumulati per ciascun file: 5

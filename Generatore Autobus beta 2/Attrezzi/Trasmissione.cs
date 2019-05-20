@@ -40,7 +40,7 @@ namespace Generatore_Autobus_beta_2
                 }
                 catch (System.Exception)
                 {
-                    //Console.WriteLine(" x x x  connessione non attiva!  x x x");
+                    Console.WriteLine(" x x x  connessione non attiva!  x x x");
                     return false;
                     // throw;
                 }

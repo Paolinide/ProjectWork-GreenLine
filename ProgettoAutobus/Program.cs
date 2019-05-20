@@ -11,6 +11,13 @@ namespace ProgettoAutobus
         static void Main(string[] args)
         {
             Console.Clear();
+            for (int i = 10; i > 0; i--)
+            {
+                Console.Write("Inizio tra {0} secondi.", i);
+                System.Threading.Thread.Sleep(1000); // aspetta 1 secondo
+                Console.Clear();
+            }
+
             // Stack pila = new Stack();
             // JsonDataRecord jsdata = new JsonDataRecord();
             // pila.Push(jsdata);
