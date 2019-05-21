@@ -56,11 +56,11 @@ namespace Generatore_Autobus_beta_2
 
             Console.WriteLine(" ***********  INIZIO  *********** ");
             var v1 = new Vehicle(); // creazione di un veicolo virtuale che simula un percorso casuale
-            for (int i = 1; i <= 14; i++)
+            for (int i = 1; i <= 40; i++)
             {
                 Console.Write($"{i,2} ");
                 if (i == 5) Trasmission.ConnectionOFF(); // viene simulata una disconnessione
-                if (i == 12) Trasmission.ConnectionON(); // la connessione viene riattivata
+                if (i == 20) Trasmission.ConnectionON(); // la connessione viene riattivata
                 System.Threading.Thread.Sleep(200); // aspetta 1 secondo
                 v1.Aggiorna(); // il veicolo si sposta ed aggiorna i suoi valori e li trasmette
             }
