@@ -7,16 +7,6 @@ const port = 4000;
 app.use(express.json());
 
 var contatore = 0;
-/* app.get('/', (request, response) => {
-  response.send('Hello from Express!');
-});
-
-app.post('/', (request, response) => {
-  response.send('Arrivato tutto bene!');
-  console.log("// " + (++contatore));
-  console.log(request.body);
-}); */
-
 app.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err);
@@ -54,31 +44,13 @@ influx.getDatabaseNames()
   })
   .then(() => {
     http.createServer(app).listen(3000, function () {
-      console.log('Listening on port 3000')
+      console.log('Influx Listening on port 3000')
     })
   })
   .catch(err => {
     console.error(`Error creating Influx database!`);
   })
-// influx.writePoints([
-//   {
-//     measurement: 'response_times',
-//     tags: { host: os.hostname() },
-//     fields: {
-//       IdVeicolo: 2,
-//       StringaVeicolo: "Pordenone-Talmassons",
-//       TimeStamp: "2019-05-03 22:33:00",
-//       Latitudine: 45.95,
-//       Longitudine: 12.65,
-//       Altitudine: 30.0,
-//       Passeggeri: 0,
-//       PorteAperte: false
-//     },
-//   }
-// ]).catch(err => {
-//   console.error(`Error saving data to InfluxDB! ${err.stack}`)
-// })
-var element;
+/* var element; */
 app.post('/', (request, response) => {
   dati = request.body[0];
  influx.writePoints([
