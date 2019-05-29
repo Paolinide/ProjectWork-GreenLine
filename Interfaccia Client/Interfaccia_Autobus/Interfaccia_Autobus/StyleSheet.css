@@ -1,0 +1,29 @@
+﻿body {
+}
+
+.mappa{
+    float:left;
+    height:50%;
+    width:50%;
+    background-color:gray;
+}
+
+.selectid {
+    padding:10px;
+    height:10%;
+    width:100%;
+    background-color:gray;
+}
+
+.rilevazioni {
+    padding: 10px;
+    height:90%;
+    width:100%;
+    background-color:gray;
+}
+.side {
+    padding: 10px;
+    height: 50%;
+    width: 100%;
+    background-color: black;
+}

@@ -22,7 +22,7 @@ app.listen(port, (err) => {
     return console.log('something bad happened', err);
   }
 
-  console.log(`server is listening on ${port}`);
+  console.log(`Node server is listening on ${port}`);
 });
 const influx = new Influx.InfluxDB({
   host: 'localhost',
@@ -54,7 +54,7 @@ influx.getDatabaseNames()
   })
   .then(() => {
     http.createServer(app).listen(3000, function () {
-      console.log('Listening on port 3000')
+      console.log('Influx Listening on port 3000')
     })
   })
   .catch(err => {
