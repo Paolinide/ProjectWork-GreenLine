@@ -4,19 +4,15 @@ const http = require('http');
 const os = require('os');
 const app = express();
 const port = 4000;
+var child = require('child_process').exec;
+var pathinflux = 'start \\DBinflux\\influxdb-1.7.4-1\\influxd.exe'
+child(pathinflux, function (err, data) {
+  if (err) {
+    return console.log('something bad happened', err);
+  }
+})
 app.use(express.json());
-
 var contatore = 0;
-/* app.get('/', (request, response) => {
-  response.send('Hello from Express!');
-});
-
-app.post('/', (request, response) => {
-  response.send('Arrivato tutto bene!');
-  console.log("// " + (++contatore));
-  console.log(request.body);
-}); */
-
 app.listen(port, (err) => {
   if (err) {
     return console.log('something bad happened', err);
@@ -60,44 +56,27 @@ influx.getDatabaseNames()
   .catch(err => {
     console.error(`Error creating Influx database!`);
   })
-// influx.writePoints([
-//   {
-//     measurement: 'response_times',
-//     tags: { host: os.hostname() },
-//     fields: {
-//       IdVeicolo: 2,
-//       StringaVeicolo: "Pordenone-Talmassons",
-//       TimeStamp: "2019-05-03 22:33:00",
-//       Latitudine: 45.95,
-//       Longitudine: 12.65,
-//       Altitudine: 30.0,
-//       Passeggeri: 0,
-//       PorteAperte: false
-//     },
-//   }
-// ]).catch(err => {
-//   console.error(`Error saving data to InfluxDB! ${err.stack}`)
-// })
-var element;
+/* var element; */
 app.post('/', (request, response) => {
   dati = request.body[0];
- influx.writePoints([
-  {
-    measurement: 'response_times',
-    tags: { host: os.hostname() },
-    fields: { IdVeicolo: dati.idVehicle,
-            StringaVeicolo: dati.description,
-            TimeStamp: dati.timeDate,
-            Latitudine: dati.latitude,
-            Longitudine: dati.longitude,
-            Altitudine: dati.altitude,
-            Passeggeri: dati.passenger,
-            PorteAperte: dati.theDoors
-    },
-  }
-]).catch(err => {
-      console.error(`Error saving data to InfluxDB! ${err.stack}`)
-    })
+  influx.writePoints([
+    {
+      measurement: 'response_times',
+      tags: { host: os.hostname() },
+      fields: {
+        IdVeicolo: dati.idVehicle,
+        StringaVeicolo: dati.description,
+        TimeStamp: dati.timeDate,
+        Latitudine: dati.latitude,
+        Longitudine: dati.longitude,
+        Altitudine: dati.altitude,
+        Passeggeri: dati.passenger,
+        PorteAperte: dati.theDoors
+      },
+    }
+  ]).catch(err => {
+    console.error(`Error saving data to InfluxDB! ${err.stack}`)
+  })
   response.send('Ok');
   console.log("// " + (++contatore));
   console.log(request.body);
@@ -110,8 +89,8 @@ app.get('/get', function (req, res) {
   influx.query(`
     select * from response_times `)
     .then(result => {
-    res.json(result)
-  }).catch(err => {
-    res.status(500).send(err.stack)
-  })
+      res.json(result)
+    }).catch(err => {
+      res.status(500).send(err.stack)
+    })
 })

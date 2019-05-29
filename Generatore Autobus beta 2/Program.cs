@@ -56,19 +56,20 @@ namespace Generatore_Autobus_beta_2
 
             Console.WriteLine(" ***********  INIZIO  *********** ");
             var v1 = new Vehicle(); // creazione di un veicolo virtuale che simula un percorso casuale
-            for (int i = 1; i <= 40; i++)
+            for (int i = 1; i <= 50; i++)
             {
-                Console.Write($"{i,2} ");
-                if (i == 10) Trasmission.ConnectionOFF(); // viene simulata una disconnessione
-                if (i == 30) Trasmission.ConnectionON(); // la connessione viene riattivata
-                System.Threading.Thread.Sleep(200); // aspetta 1 secondo
+                Console.Write($"{i:000} ");
+                if (i == 35) Trasmission.ConnectionON(); // la connessione viene riattivata
+                System.Threading.Thread.Sleep(500); // aspetta mezzo secondo
                 v1.Aggiorna(); // il veicolo si sposta ed aggiorna i suoi valori e li trasmette
+                if (i == 10) Trasmission.ConnectionOFF(); // viene simulata una disconnessione
             }
             // adesso controlliamo se i record sono stati spediti tutti o qualcuno è rimasto in attesa nello stack
-            if (!Trasmission.connessioneAttiva) Console.WriteLine();
+            // if (!Trasmission.connessioneAttiva) Console.WriteLine();
             if (!Archive.savedRecords) Console.WriteLine("Nessun record rimasto in coda.");
             else foreach (var item in Archive.stack)
-                    Console.WriteLine("Nello stack: " + ((JsonDataRecord)item).ToString());
+                    Console.WriteLine("Ancora nello stack: " + ((JsonDataRecord)item).ToString());
+
             Console.WriteLine(" ***********   FINE   *********** ");
         }
     }
