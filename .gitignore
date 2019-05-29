@@ -380,3 +380,8 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+Generatore Autobus beta 2/Generatore Autobus beta 2.csproj
+Generatore Autobus beta 2/obj/Debug/netcoreapp2.1/Generatore Autobus beta 2.csproj.CoreCompileInputs.cache
+Generatore Autobus beta 2/obj/Generatore Autobus beta 2.csproj.nuget.g.targets
+Generatore Autobus beta 2/obj/Generatore Autobus beta 2.csproj.nuget.g.props
+Generatore Autobus beta 2/obj/project.assets.json
