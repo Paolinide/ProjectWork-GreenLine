@@ -1,0 +1,3 @@
+//raccolta comandi per AWS cli
+aws iot describe-endpoint
+
