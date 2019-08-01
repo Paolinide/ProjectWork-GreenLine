@@ -1,0 +1,13 @@
+{
+    "name": "name",
+    "description": "Apinode",
+    "authors": "Greenlineteam",
+    "version": "1.0.0",
+    "main": "server.js",
+    "dependencies": {
+        "express": "^4.17.1",
+        "http": "0.0.0",
+        "influx": "^5.4.0",
+        "os": "^0.1.1"
+    }
+}
