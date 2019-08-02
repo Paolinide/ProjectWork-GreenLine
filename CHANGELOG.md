@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [0.0.1] - 22/05/2019
 ### Added
 - File README con consigli per avviare il programma
-- CHANGELOG per tenere traccia degli avanzamenti e delle funzionalit‡
+- CHANGELOG per tenere traccia degli avanzamenti e delle funzionalit√†
 - Aggiunto autoavvio di influxDB con note sul README
 
 
