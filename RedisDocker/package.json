@@ -1,0 +1,11 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+        "bluebird": "^3.5.5",
+        "redis": "^2.8.0"
+    }
+}
